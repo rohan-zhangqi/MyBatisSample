@@ -2,6 +2,8 @@ package tk.mybatis.simple.mapper;
 
 import tk.mybatis.simple.model.SysUser;
 
+import java.util.List;
+
 /**
  * @Auther: Qi.Zhang4
  * @Date: 2019/5/23 08:43
@@ -14,4 +16,10 @@ public interface UserMapper {
      * @return
      */
     SysUser selectById(Long id);
+
+    /**
+     * 查询全部
+     * @return
+     */
+    List<SysUser> selectAll();
 }

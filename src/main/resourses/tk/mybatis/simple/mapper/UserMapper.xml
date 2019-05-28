@@ -16,4 +16,15 @@
     <select id="selectById" resultMap="userMap">
       select * from sys_user where id = #{id}
     </select>
+
+    <select id="selectAll" resultType="tk.mybatis.simple.model.SysUser">
+        select id,
+            user_name userName,
+            user_password userPassword,
+            user_email userEmail,
+            user_info userinfo,
+            head_img headimg,
+            create_time createTime
+        from sys_user
+    </select>
 </mapper>
