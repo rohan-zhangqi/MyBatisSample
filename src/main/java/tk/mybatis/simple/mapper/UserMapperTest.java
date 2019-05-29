@@ -22,10 +22,9 @@ public class UserMapperTest extends BaseMapperTest {
             //调用selectById方法，查询id = 1的用户
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
             SysUser user = userMapper.selectById(1L);
-
             //user不为空
             Assert.assertNotNull(user);
-
+            //userName = admin
             Assert.assertEquals("admin", user.getUserName());
         } finally {
             //不要忘记关闭sqlSession
@@ -38,15 +37,14 @@ public class UserMapperTest extends BaseMapperTest {
         SqlSession sqlSession = getSqlSession();
         try {
             UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-
             //调用selectById方法查询所有用户
             List<SysUser> userList = userMapper.selectAll();
-
             //结果不为空
             Assert.assertNotNull(userList);
-
+            //用户数量大于0个
             Assert.assertTrue(userList.size() > 0);
         } finally {
+            //不要忘记关闭sqlSession
             sqlSession.close();
         }
     }
