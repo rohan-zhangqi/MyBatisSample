@@ -1,5 +1,6 @@
 package tk.mybatis.simple.mapper;
 
+import tk.mybatis.simple.model.SysRole;
 import tk.mybatis.simple.model.SysUser;
 
 import java.util.List;
@@ -22,4 +23,11 @@ public interface UserMapper {
      * @return
      */
     List<SysUser> selectAll();
+
+    /**
+     * 根据用户id获取角色信息
+     * @param userId
+     * @return
+     */
+    List<SysRole> selectRolesByUserId(Long userId);
 }
