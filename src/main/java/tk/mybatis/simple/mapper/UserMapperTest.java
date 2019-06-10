@@ -94,4 +94,34 @@ public class UserMapperTest extends BaseMapperTest {
             sqlSession.close();
         }
     }
+
+    @Test
+    public void testInsert2(){
+        SqlSession sqlSession = getSqlSession();
+        try{
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            //创建一个user对象
+            SysUser user = new SysUser();
+            user.setUserName("test1");
+            user.setUserPassword("123456");
+            user.setUserEmail("test@mybatis.tk");
+            user.setUserInfo("test info");
+            //正常情况下应该读入一张图片到byte数组中
+            user.setHeadImg(new byte[]{1,2,3});
+            user.setCreateTime(new Date());
+            //将新建的对象插入数据库中，特别注意这里的返回值result是执行的SQL影响的行数
+            int result = userMapper.insert2(user);
+            //只插入1条数据
+            Assert.assertEquals(1, result);
+            //因为id回写，所以id不为null
+            Assert.assertNull(user.getId());
+        } finally {
+            //为了不影响其他测试，这里选择回滚
+            //由于默认的sqlSessionFactory.openSession()是不自动提交的
+            //因此不手动执行commit也不会提交到数据库
+            sqlSession.rollback();
+            //不要忘记关闭sqlSession
+            sqlSession.close();
+        }
+    }
 }
