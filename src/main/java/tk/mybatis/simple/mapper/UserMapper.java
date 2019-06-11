@@ -58,4 +58,19 @@ public interface UserMapper {
      * @return
      */
     int updateById(SysUser sysUser);
+
+    /**
+     * 通过主键删除
+     * @param id
+     * @return
+     */
+    int deleteById(Long id);
+
+    /**
+     * 通过主键删除
+     * @param sysUser
+     * @return
+     */
+    int deleteById(SysUser sysUser);
+
 }
