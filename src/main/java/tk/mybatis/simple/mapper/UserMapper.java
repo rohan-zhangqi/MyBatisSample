@@ -73,4 +73,11 @@ public interface UserMapper {
      */
     int deleteById(SysUser sysUser);
 
+    /**
+     * 根据用户id和角色的enabled状态获取用户的角色
+     * @param userId
+     * @param enabled
+     * @return
+     */
+    List<SysRole> selectRolesByUserIdAndRoleEnabled(Long userId, Integer enabled);
 }
