@@ -1,5 +1,6 @@
 package tk.mybatis.simple.mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Result;
@@ -7,6 +8,7 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import tk.mybatis.simple.model.SysRole;
 
 import java.util.List;
@@ -91,5 +93,24 @@ public interface RoleMapper {
                 before = false)
     int insert3(SysRole sysRole);
 
+    /**
+     * 3.3 @Update注解
+     * @param sysRole
+     * @return
+     */
+    @Update({"update sys_role",
+            "set role_name = #{roleName},",
+            "enable = #{enabled},",
+            "create_by = #{createBy},",
+            "create_time = #{create_time, jdbcType=TIMESTAMP}",
+            "where id = #{id}"})
+    int updateById(SysRole sysRole);
 
+    /**
+     * 3.3 @Delete注解
+     * @param id
+     * @return
+     */
+    @Delete("delete from sys_role where id = #{id}")
+    int deleteById(Long id);
 }
