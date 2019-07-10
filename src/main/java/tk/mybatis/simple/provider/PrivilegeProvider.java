@@ -10,6 +10,9 @@ import org.apache.ibatis.jdbc.SQL;
 public class PrivilegeProvider {
 
     public String selectById(final Long id){
+        // 两者任选其一
+//        return "select id, privilege_name, privilege_url" +
+//            "from sys_privilege where id = #{id}";
         return new SQL(){
             {
                 SELECT("id, privilege_name, privilege_url");
@@ -17,5 +20,6 @@ public class PrivilegeProvider {
                 WHERE("id = #{id}");
             }
         }.toString();
+
     }
 }
