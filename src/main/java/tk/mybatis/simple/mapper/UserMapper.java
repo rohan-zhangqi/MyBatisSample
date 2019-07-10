@@ -91,10 +91,9 @@ public interface UserMapper {
     List<SysRole> selectRolesByUserAndRole(@Param("user") SysUser user, @Param("role") SysRole role);
 
     /**
-     * 根据用户名和用户邮箱查询用户
-     * @param userName
-     * @param userEmail
+     * 根据动态条件查询用户信息
+     * @param user
      * @return
      */
-    List<SysUser> selectByUser(@Param("userName") String userName, @Param("userEmail") String userEmail);
+    List<SysUser> selectByUser(SysUser user);
 }
