@@ -48,9 +48,26 @@
             values (#{id}, #{userName}, #{userPassword}, #{userEmail}, #{userInfo}, #{headImg, jdbcType=BLOB}, #{createTime, jdbcType=TIMESTAMP})
     </insert>
 
-    <insert id="insert2" useGeneratedKeys="true" keyProperty="id">
+    <!--<insert id="insert2" useGeneratedKeys="true" keyProperty="id">
       insert into sys_user(user_name, user_password, user_email, user info, head img, create time)
       values(#{userName}, #{userPassword}, #{userEmail} , #{headimg, jdbcType=BLOB}, #{userinfo}, #{createTime, jdbcType=TIMESTAMP})
+    </insert>-->
+    <!-- 4.1.3 -->
+    <insert id="insert2" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_user (
+        user_name, user_password,
+        <if test="userEmail != null and userEmail != ''">
+            user_email,
+        </if>
+        user_info, head_img, create_time)
+        values (
+        #{userName}, #{userPassword},
+        <if test="userEmail != null and userEmail != ''">
+            #{userEmail},
+        </if>
+        #{userInfo}, #{headImg, jdbcType=BLOB},
+        #{createTime, jdbcType=TIMESTAMP}
+        )
     </insert>
 
     <insert id="insert3">

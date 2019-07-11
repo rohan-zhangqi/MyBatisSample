@@ -286,4 +286,31 @@ public class UserMapperTest extends BaseMapperTest {
             sqlSession.close();
         }
     }
+
+    @Test
+    public void testInsert2Selective(){
+        SqlSession sqlSession = getSqlSession();
+        try{
+            UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+            //创建一个user对象
+            SysUser user = new SysUser();
+            user.setUserName("test-selective");
+            user.setUserPassword("123456");
+            user.setUserInfo("test info");
+            user.setCreateTime(new Date());
+
+            //插入数据库
+            userMapper.insert2(user);
+
+            //获取插入的这条数据
+            user = userMapper.selectById(user.getId());
+            Assert.assertEquals("test@mybatis.tk", user.getUserEmail());
+        } finally {
+            //为了不影响其他测试，这里选择回滚
+            sqlSession.rollback();
+            //不要忘记关闭sqlSession
+            sqlSession.close();
+        }
+    }
 }
